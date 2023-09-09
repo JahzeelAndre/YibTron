@@ -1,5 +1,7 @@
-﻿using FontAwesome.Sharp;
+﻿//Librerías internas.
 using YibTronFronted.Utilerias;
+//Librerías externas.
+using FontAwesome.Sharp;
 
 namespace YibTronFronted.Controles
 {

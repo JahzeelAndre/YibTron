@@ -5,7 +5,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>YibTronBackend</Title>
     <PackageId>YibTron.YibTronBackend.DataBases</PackageId>
     <AssemblyName>YibTronBackend</AssemblyName>
@@ -14,22 +14,33 @@
     <Authors>JahzeelAndre</Authors>
     <Product>YibTronBackend</Product>
     <Description>Paquete que facilita la creación de la base de datos y tablas mediante clases heredables con ADO NET.
-Clases con herramientas útiles para la comunicación con la base de datos, conversiones, etc.</Description>
+Clases con herramientas útiles para la comunicación con la base de datos.</Description>
     <PackageProjectUrl>https://github.com/JahzeelAndre/YibTron</PackageProjectUrl>
-    <Copyright>Copyright (c) 2023 Jahzeel Yibale</Copyright>
+    <Copyright>Copyright (c) 2023 Jahzeel Andre Yibale Toledo </Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/JahzeelAndre/YibTron</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Backend, SqlServer</PackageTags>
-    <PackageReleaseNotes>Utilidades para la creación de bases de datos, tablas y registros en sql server.
-Creación de interfaces de usuarios rápidas y atractivas.</PackageReleaseNotes>
+    <PackageReleaseNotes>Utilidades para la creación de bases de datos, tablas y registros en sql server.</PackageReleaseNotes>
     <PackageOutputPath>bin\Release\</PackageOutputPath>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <DebugType>embedded</DebugType>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Company>JahzeelAndre</Company>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\Downloads\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\..\..\..\..\Downloads\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
