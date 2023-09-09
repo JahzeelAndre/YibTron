@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Title>YibTronBackend</Title>
+    <PackageId>YibTron.YibTronBackend.DataBases</PackageId>
+    <AssemblyName>YibTronBackend</AssemblyName>
+    <RootNamespace>YibTronBackend</RootNamespace>
+    <Version>1.0.0</Version>
+    <Authors>JahzeelAndre</Authors>
+    <Product>YibTronBackend</Product>
+    <Description>Paquete que facilita la creación de la base de datos y tablas mediante clases heredables con ADO NET.
+Clases con herramientas útiles para la comunicación con la base de datos, conversiones, etc.</Description>
+    <PackageProjectUrl>https://github.com/JahzeelAndre/YibTron</PackageProjectUrl>
+    <Copyright>Copyright (c) 2023 Jahzeel Yibale</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/JahzeelAndre/YibTron</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Backend, SqlServer</PackageTags>
+    <PackageReleaseNotes>Utilidades para la creación de bases de datos, tablas y registros en sql server.
+Creación de interfaces de usuarios rápidas y atractivas.</PackageReleaseNotes>
+    <PackageOutputPath>bin\Release\</PackageOutputPath>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <DebugType>embedded</DebugType>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
+  </ItemGroup>
+
+</Project>

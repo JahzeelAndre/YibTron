@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0-windows10.0.17763.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>YibTronFronted</AssemblyName>
+    <RootNamespace>YibTronFronted</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>YibTron.YibTronFrontend.Controls</PackageId>
+    <Title>YibTronFrontend</Title>
+    <Version>1.0.0</Version>
+    <Authors>JahzeelAndre</Authors>
+    <Company>JahzeelAndre</Company>
+    <Product>YibTronFrontend</Product>
+    <Description>Este proyecto contiene controles para la interfaz de usuario.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
+  </ItemGroup>
+
+</Project>
