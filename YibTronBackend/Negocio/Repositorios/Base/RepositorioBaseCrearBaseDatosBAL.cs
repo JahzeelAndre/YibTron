@@ -113,7 +113,7 @@ namespace YibTronBackend.Negocio.Repositorios.Base
                                 string opcionNuloLlaveForanea = columnaTablaItem.PermiteNulos == true ? "" : "not null";
                                 string opcionValorUnicoLlaveForanea = columnaTablaItem.ValorUnico == true ? "unique" : "";
                                 cadenaComando.AppendLine($"{columnaTablaItem.Nombre} numeric(11,0) {opcionNuloLlaveForanea} {opcionValorUnicoLlaveForanea},");
-                                cadenaComando.AppendLine($"CONSTRAINT fk_{estructuraTablaItem.Nombre} FOREIGN KEY ({columnaTablaItem.Nombre}) REFERENCES {columnaTablaItem.ReferenciaTabla}  (Id),");
+                                cadenaComando.AppendLine($"CONSTRAINT fk_{columnaTablaItem.Nombre} FOREIGN KEY ({columnaTablaItem.Nombre}) REFERENCES {columnaTablaItem.ReferenciaTabla}  (Id),");
                                 break;
 
                             case ColumnaAtributte.ETipoCampo.Texto:
@@ -201,7 +201,7 @@ namespace YibTronBackend.Negocio.Repositorios.Base
                                     string opcionNuloLlaveForanea = columnaTablaItem.PermiteNulos == true ? "" : "not null";
                                     string opcionValorUnicoLlaveForanea = columnaTablaItem.ValorUnico == true ? "unique" : "";
                                     cadenaComando.AppendLine($"alter table {estructuraTablaItem.Nombre} add {columnaTablaItem.Nombre} numeric(11,0) {opcionNuloLlaveForanea} {opcionValorUnicoLlaveForanea};");
-                                    cadenaComando.AppendLine($"alter table {estructuraTablaItem.Nombre} add CONSTRAINT fk_{estructuraTablaItem.Nombre} FOREIGN KEY ({columnaTablaItem.Nombre}) REFERENCES {columnaTablaItem.ReferenciaTabla}  (Id);");
+                                    cadenaComando.AppendLine($"alter table {estructuraTablaItem.Nombre} add CONSTRAINT fk_{columnaTablaItem.Nombre} FOREIGN KEY ({columnaTablaItem.Nombre}) REFERENCES {columnaTablaItem.ReferenciaTabla}  (Id);");
                                     break;
 
                                 case ColumnaAtributte.ETipoCampo.Texto:
