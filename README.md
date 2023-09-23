@@ -1,4 +1,4 @@
-![LogoYibTron](https://github.com/JahzeelAndre/YibTronLibrary/assets/95154848/87c170fa-173e-4f34-8855-75d4e1b6ef82)
+![LogoYibTron](https://github.com/JahzeelAndre/YibTron/assets/95154848/f10a39c0-8fd7-4dc4-ba02-3fe0f19f6a77)
 <h1> Bienvenidos al repositorio de la librería YibTron </h1>
 <p> <b> Este repositorio contendrá dos proyectos de Net (biblioteca de clases y biblioteca de controles windows forms), uno será para el uso en el backend, y el otro para el uso en el frontend. </b> </p>
 
