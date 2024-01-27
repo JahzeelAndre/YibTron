@@ -7,7 +7,7 @@ using Microsoft.Data.SqlClient;
 
 namespace YibTronBackend.Utilerias.SqlServer
 {
-    internal class SqlMetodos
+    public class SqlMetodos
     {
         #region Métodos...
         /// <summary>
@@ -61,6 +61,13 @@ namespace YibTronBackend.Utilerias.SqlServer
                     string[] cadenaSeparada = ex.Message.Split("'");
                     //Provoca una excepción con el nombre de la columna invalido.
                     throw new Exception($"El nombre de la columna \"{cadenaSeparada[1]}\" es invalido.");
+                } 
+                else if (ex.Message.Contains("Cannot open database \"BoutiqueVisteme\""))
+                {
+                    //Obtiene el nombre de la columna recibido.
+                    string[] cadenaSeparada = ex.Message.Split("'");
+                    //Provoca una excepción con el nombre de la columna invalido.
+                    throw new Exception($"Hubo un problema con la base de datos, asegúrese de correr el crear base de datos.");
                 }
                 else
                 {

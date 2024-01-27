@@ -35,13 +35,13 @@ namespace YibTronBackend.Negocio.Repositorios.Implementacion
         #region Métodos...
 
         //Método para eliminar una entidad en la base de datos.
-        public override async Task<int?> eliminar(int Id)
+        public override async Task<int> eliminar(int Id)
         {
             return await AccesoDatosDAL.eliminar(Id);
         }
 
         //Método para insertar o modificar una entidad en la base de datos.
-        public override async Task<int?> guardar(Entidad entidad)
+        public override async Task<int> guardar(Entidad entidad)
         {
             if (entidad.Id == 0)
             {

@@ -50,14 +50,14 @@ namespace YibTronBackend.Negocio.Repositorios.Base
         /// </summary>
         /// <param name="entidad"></param>
         /// <returns>Valor int, resultante de las filas afectadas en la base de datos.</returns>
-        public abstract Task<int?> guardar(Entidad entidad);
+        public abstract Task<int> guardar(Entidad entidad);
 
         /// <summary>
         /// Método para eliminar una entidad de la base de datos.
         /// </summary>
         /// <param name="Id"></param>
         /// <returns>Valor int, resultante de las filas afectadas en la base de datos.</returns>
-        public abstract Task<int?> eliminar(int Id);
+        public abstract Task<int> eliminar(int Id);
         #endregion
 
         #region Métodos auxiliares...

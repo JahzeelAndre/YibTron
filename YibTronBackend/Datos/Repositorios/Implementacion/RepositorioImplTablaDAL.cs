@@ -26,7 +26,7 @@ namespace YibTronBackend.Datos.Repositorios.Implementacion
         #region Métodos CRUD...
 
         //Método para eliminar un objeto en la base de datos.
-        public override async Task<int?> eliminar(int Id)
+        public override async Task<int> eliminar(int Id)
         {
             string cadenaComando = $"delete from {NombreTabla} where Id = {Id}";
             ComprobarCadenas(CadenaConexion, cadenaComando);
@@ -34,18 +34,18 @@ namespace YibTronBackend.Datos.Repositorios.Implementacion
         }
 
         //Método para insertar objeto en la base de datos.
-        public override async Task<int?> insertar(Entidad entidad)
+        public override async Task<int> insertar(Entidad entidad)
         {
             return await guardar(entidad);
         }
 
         //Método para modificar objeto en la base de datos.
-        public override async Task<int?> modificar(Entidad entidad)
+        public override async Task<int> modificar(Entidad entidad)
         {
             return await guardar(entidad);
         }
 
-        public async Task<int?> guardar(Entidad entidad)
+        public async Task<int> guardar(Entidad entidad)
         {
             //Verificamos que el nombre de la tabla no este vacio.
             if (string.IsNullOrEmpty(NombreTabla)) throw new Exception("Favor de mandar el nombre de la tabla.");
@@ -66,6 +66,7 @@ namespace YibTronBackend.Datos.Repositorios.Implementacion
                 switch (informacionColumnaItem.TipoCampo)
                 {
                     case ColumnaAtributte.ETipoCampo.ClaveForanea:
+                        valoresColumnas.Add(informacionColumnaItem.ValorColumna);
                         break;
                     case ColumnaAtributte.ETipoCampo.Texto:
                         valoresColumnas.Add($"'{informacionColumnaItem.ValorColumna}'");
@@ -73,10 +74,16 @@ namespace YibTronBackend.Datos.Repositorios.Implementacion
                     case ColumnaAtributte.ETipoCampo.NumeroFloat:
                         valoresColumnas.Add(informacionColumnaItem.ValorColumna);
                         break;
+                    case ColumnaAtributte.ETipoCampo.NumeroNumerico:
+                        valoresColumnas.Add(informacionColumnaItem.ValorColumna);
+                        break;
                     case ColumnaAtributte.ETipoCampo.SiNo:
                         valoresColumnas.Add(informacionColumnaItem.ValorColumna);
                         break;
                     case ColumnaAtributte.ETipoCampo.FechaDate:
+                        valoresColumnas.Add(informacionColumnaItem.ValorColumna);
+                        break;
+                    case ColumnaAtributte.ETipoCampo.FechaDateTime:
                         valoresColumnas.Add(informacionColumnaItem.ValorColumna);
                         break;
                 }
@@ -86,7 +93,7 @@ namespace YibTronBackend.Datos.Repositorios.Implementacion
             string valoresColumnasSeparados = string.Join(",", valoresColumnas);
             if (entidad.Id == 0)
             {
-                cadenaComando.AppendLine($"insert into [dbo].[{NombreTabla}] ({nombresColumnasSeparados}) values ({valoresColumnasSeparados})");
+                cadenaComando.AppendLine($"insert into [dbo].[{NombreTabla}] ({nombresColumnasSeparados}) values ({valoresColumnasSeparados}); ");
             }
             else
             {
@@ -96,14 +103,21 @@ namespace YibTronBackend.Datos.Repositorios.Implementacion
                 {
                     arregloNombresConValores[i] = $"{nombresColumnas[i]} = {valoresColumnas[i]}";
                 }
-                cadenaComando.AppendLine($"{string.Join(",", arregloNombresConValores)} where Id = {entidad.Id}");
+                cadenaComando.AppendLine($"{string.Join(", ", arregloNombresConValores)} where Id = {entidad.Id}; ");
             }
-            //Armamos el comando a ejecutar.
 
+            cadenaComando.AppendLine("SELECT SCOPE_IDENTITY();");
+            //Armamos el comando a ejecutar.
+            string cadenaComandoString = cadenaComando.ToString();
             //Comprobamos cadenas para la ejecución del sql.
-            ComprobarCadenas(CadenaConexion, cadenaComando.ToString());
+            ComprobarCadenas(CadenaConexion, cadenaComandoString);
             //Regresamos el resultado del método.
-            return await SqlMetodos.ejecutarComando(CadenaConexion!, cadenaComando.ToString());
+            object? respuesta = await SqlMetodos.ejecutarEscalar(CadenaConexion!, cadenaComandoString);
+
+            if (entidad.Id > 0)
+                respuesta = 0;
+
+            return Convert.ToInt32(respuesta);
         }
 
         //Método para obtener objeto de la base de datos.
@@ -367,7 +381,6 @@ namespace YibTronBackend.Datos.Repositorios.Implementacion
                             {
                                 //Asigna el valor obtenido de la fila de la base de datos a la propiedad.
                                 propiedadItem.SetValue(instanciaEntidad, Convert.ChangeType(Fila["Id"].ToString(), tipoPropiedad));
-                                Debug.WriteLine("Entró al id");
                             }
                             else
                             {

@@ -48,17 +48,17 @@ namespace YibTronBackend.Datos.Repositorios.Base
         /// Método para insertar objeto en la base de datos.
         /// </summary>
         /// <param name="entidad"></param>
-        /// <returns>Valor int, resultante de las filas afectadas en la base de datos.</returns>
+        /// <returns>Valor int, resultante del id del objeto insertado en la base de datos.</returns>
         /// <exception cref="Exception"></exception>
-        public abstract Task<int?> insertar(Entidad entidad);
+        public abstract Task<int> insertar(Entidad entidad);
 
         /// <summary>
         /// Método para modificar objeto en la base de datos.
         /// </summary>
         /// <param name="Entidad"></param>
-        /// <returns>Valor int, resultante de las filas afectadas en la base de datos.</returns>
+        /// <returns>Valor int, resultante del id del objeto modificado en la base de datos.</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public abstract Task<int?> modificar(Entidad entidad);
+        public abstract Task<int> modificar(Entidad entidad);
 
         /// <summary>
         /// Método para eliminar un objeto en la base de datos.
@@ -66,7 +66,7 @@ namespace YibTronBackend.Datos.Repositorios.Base
         /// <param name="Id"></param>
         /// <returns>Valor int, resultante de las filas afectadas en la base de datos.</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public abstract Task<int?> eliminar(int Id);
+        public abstract Task<int> eliminar(int Id);
         #endregion
 
         #region Métodos estructura...
