@@ -1,6 +1,8 @@
 ﻿//Librerías internas.
+using System;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.Reflection;
 using System.Text;
 using YibTronBackend.Atributos.Campos;
@@ -84,13 +86,14 @@ namespace YibTronBackend.Datos.Repositorios.Implementacion
                         valoresColumnas.Add(informacionColumnaItem.ValorColumna);
                         break;
                     case ColumnaAtributte.ETipoCampo.FechaDateTime:
-                        valoresColumnas.Add(informacionColumnaItem.ValorColumna);
+                        DateTime dateTimeAux = Convert.ToDateTime(informacionColumnaItem.ValorColumna);
+                        valoresColumnas.Add($"CONVERT (datetime, '{dateTimeAux.ToString("s")}')");
                         break;
                 }
             });
             //Separamos los nombres de las columnas y los valores con una coma ",".
-            string nombresColumnasSeparados = string.Join(",", nombresColumnas);
-            string valoresColumnasSeparados = string.Join(",", valoresColumnas);
+            string nombresColumnasSeparados = string.Join(", ", nombresColumnas);
+            string valoresColumnasSeparados = string.Join(", ", valoresColumnas);
             if (entidad.Id == 0)
             {
                 cadenaComando.AppendLine($"insert into [dbo].[{NombreTabla}] ({nombresColumnasSeparados}) values ({valoresColumnasSeparados}); ");
@@ -302,7 +305,7 @@ namespace YibTronBackend.Datos.Repositorios.Implementacion
         private List<InformacionColumnasInfo> obtenerListaInformacionColumnas(Entidad entidad)
         {
             //Crea la lista a devolver.
-            List<InformacionColumnasInfo> camposValores = new List<InformacionColumnasInfo>();
+            List<InformacionColumnasInfo> listaCamposValores = new List<InformacionColumnasInfo>();
             //Obtiene el tipo de la entidad recibida.
             Type tipoEntidadObjeto = entidad.GetType();
             //Crea un array con la propiedades de la entidad.
@@ -325,7 +328,7 @@ namespace YibTronBackend.Datos.Repositorios.Implementacion
                         //Obtiene el valor en la propiedad de la entidad.
                         object? valor = propiedad.GetValue(entidad);
                         //Agregamos un objeto con los datos de la entidad a la lista.
-                        camposValores.Add(new InformacionColumnasInfo
+                        listaCamposValores.Add(new InformacionColumnasInfo
                         {
                             NombreColumna = columnaAtributo.Nombre,
                             TipoCampo = columnaAtributo.Tipo,
@@ -335,12 +338,37 @@ namespace YibTronBackend.Datos.Repositorios.Implementacion
                     //Si no, lanzamos un error que diga al usuario que debe de poner un atributo.
                     else
                     {
-                        if (!constanteItem.Name.Equals("Id")) throw new Exception("Las constantes con los nombres de las columnas deben de tener el atributo \"ColumnaAttribute\".");
+                        //switch (constanteItem.Name)
+                        //{
+                        //    case "Id":
+
+                        //        break;
+                        //    case "IdUsuario":
+
+                        //        break;
+                        //    case "FechaAlta":
+                        //        listaCamposValores.Add
+                        //        break;
+                        //    case "FechaUltimaModificacion":
+
+                        //        break;
+                        //    case "FechaBaja":
+                        //        listaCamposValores.Add(new InformacionColumnasInfo
+                        //        {
+                        //            NombreColumna = constanteItem.Name,
+                        //            TipoCampo = ColumnaAtributte.ETipoCampo.FechaDateTime,
+                        //            ValorColumna = null
+                        //        });
+                        //        break;
+
+                        //}
+                        if (!constanteItem.Name.Equals("Id") ) throw new Exception("Las constantes con los nombres de las columnas deben de tener el atributo \"ColumnaAttribute\".");
+
                     }
                 }
             }
             //Regresamos la lista con la información de la entidad.
-            return camposValores;
+            return listaCamposValores;
         }
 
         //Método para convertir una DataRow a un objeto de tipo Entidad.
