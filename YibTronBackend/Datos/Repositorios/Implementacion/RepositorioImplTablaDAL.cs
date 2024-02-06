@@ -59,6 +59,24 @@ namespace YibTronBackend.Datos.Repositorios.Implementacion
             List<string> nombresColumnas = new List<string>();
             //Creamos StringBuilder para guardar los valores de las columnas.
             List<object?> valoresColumnas = new List<object?>();
+
+            if(entidad.Id == 0)
+            {
+                InformacionColumnasInfo columna = listaInformacionColumnas.First(columnaItem => columnaItem.Equals(ColumnasPredeterminadas.ConstantesColumnasPredeterminadas.IdUsuarioActualizado));
+                listaInformacionColumnas.Remove(columna);
+
+                columna = listaInformacionColumnas.First(columnaItem => columnaItem.Equals(ColumnasPredeterminadas.ConstantesColumnasPredeterminadas.FechaActualizado));
+                listaInformacionColumnas.Remove(columna);
+            }
+            else
+            {
+                InformacionColumnasInfo columna = listaInformacionColumnas.First(columnaItem => columnaItem.Equals(ColumnasPredeterminadas.ConstantesColumnasPredeterminadas.IdUsuarioAlta));
+                listaInformacionColumnas.Remove(columna);
+
+                columna = listaInformacionColumnas.First(columnaItem => columnaItem.Equals(ColumnasPredeterminadas.ConstantesColumnasPredeterminadas.FechaAlta));
+                listaInformacionColumnas.Remove(columna);
+            }
+
             //Recorre la lista con los datos de las columnas.
             listaInformacionColumnas.ForEach(informacionColumnaItem =>
             {
@@ -338,31 +356,12 @@ namespace YibTronBackend.Datos.Repositorios.Implementacion
                     //Si no, lanzamos un error que diga al usuario que debe de poner un atributo.
                     else
                     {
-                        //switch (constanteItem.Name)
-                        //{
-                        //    case "Id":
-
-                        //        break;
-                        //    case "IdUsuario":
-
-                        //        break;
-                        //    case "FechaAlta":
-                        //        listaCamposValores.Add
-                        //        break;
-                        //    case "FechaUltimaModificacion":
-
-                        //        break;
-                        //    case "FechaBaja":
-                        //        listaCamposValores.Add(new InformacionColumnasInfo
-                        //        {
-                        //            NombreColumna = constanteItem.Name,
-                        //            TipoCampo = ColumnaAtributte.ETipoCampo.FechaDateTime,
-                        //            ValorColumna = null
-                        //        });
-                        //        break;
-
-                        //}
-                        if (!constanteItem.Name.Equals("Id") ) throw new Exception("Las constantes con los nombres de las columnas deben de tener el atributo \"ColumnaAttribute\".");
+                        List<InformacionColumnasInfo> listaInformacionColumnas = ColumnasPredeterminadas.listaColumnasPredeterminadas;
+                        InformacionColumnasInfo columna = listaInformacionColumnas.First(columnaItem => columnaItem.NombreColumna.Equals(constanteItem.Name));
+                        if (columna != null )
+                            listaCamposValores.Add(columna);
+                        else
+                            if (!constanteItem.Name.Equals("Id")) throw new Exception("Las constantes con los nombres de las columnas deben de tener el atributo \"ColumnaAttribute\".");
 
                     }
                 }

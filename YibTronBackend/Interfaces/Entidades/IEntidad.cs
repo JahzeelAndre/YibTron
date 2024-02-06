@@ -7,10 +7,10 @@
         /// Propiedad para obtener o asignar el Id de la entidad.
         /// </summary>
         public int Id { get; set; }
-        public int IdUsuario { get; set; }
+        public int IdUsuarioAlta { get; set; }
+        public int IdUsuarioActualizado { get; set; }
         public DateTime FechaAlta { get; set; }
-        public DateTime FechaUltimaModificacion { get; set; }
-        public DateTime FechaBaja { get; set; }
+        public DateTime FechaActualizado { get; set; }
         #endregion
     }
 }
